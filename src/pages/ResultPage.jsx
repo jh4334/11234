@@ -2,7 +2,7 @@ import { useState } from "react";
 import ScoreBar from "../components/ScoreBar";
 import { calculateScores, maxScores, categoryLabels } from "../data/scoring";
 
-export default function ResultPage({ name, missionResults, onSavePledge }) {
+export default function ResultPage({ name, missionResults, onSavePledge, onReset }) {
   const [pledge, setPledge] = useState("");
   const [saved, setSaved] = useState(false);
   const scores = calculateScores(missionResults);
@@ -66,7 +66,7 @@ export default function ResultPage({ name, missionResults, onSavePledge }) {
 
         <button
           className="btn btn-secondary"
-          onClick={() => window.location.reload()}
+          onClick={onReset}
         >
           처음부터 다시 하기
         </button>

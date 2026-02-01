@@ -414,6 +414,180 @@
   font-size: 0.95rem;
 }
 
+/* ===== Teacher Mode Button ===== */
+.btn-teacher {
+  background: transparent;
+  color: var(--text-light);
+  border: none;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.btn-teacher:hover {
+  color: var(--primary);
+}
+
+/* ===== Teacher Login ===== */
+.teacher-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.teacher-desc {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* ===== Teacher Dashboard ===== */
+.teacher-page .card {
+  max-width: 800px;
+}
+
+.teacher-summary {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.avg-section {
+  margin-bottom: 2rem;
+}
+
+.avg-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.avg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.avg-item {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+}
+
+.avg-label {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.avg-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.avg-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.avg-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #818cf8, var(--primary));
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* ===== Student Table ===== */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.student-table th {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.student-table td {
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.student-table tbody tr:hover {
+  background: var(--primary-light);
+}
+
+.student-table .total-cell {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.student-table .pledge-cell {
+  text-align: left;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== Danger Button ===== */
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 2px solid #fecaca;
+  margin-top: 0.75rem;
+}
+
+.btn-danger:hover {
+  background: #fef2f2;
+  border-color: var(--danger);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-light);
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-hint {
+  font-size: 0.9rem !important;
+}
+
 /* ===== Animations ===== */
 @keyframes fadeIn {
   from {

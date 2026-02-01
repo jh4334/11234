@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function StartPage({ onNext }) {
+export default function StartPage({ onNext, onTeacherMode }) {
   const [name, setName] = useState("");
 
   const handleSubmit = (e) => {
@@ -31,6 +31,9 @@ export default function StartPage({ onNext }) {
             시작하기
           </button>
         </form>
+        <button className="btn btn-teacher" onClick={onTeacherMode}>
+          교사 모드
+        </button>
       </div>
     </div>
   );
