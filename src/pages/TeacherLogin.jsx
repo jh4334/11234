@@ -1,49 +1,42 @@
 import { useState } from "react";
 
-const TEACHER_PASSWORD = "ethics2025";
+const PASSWORD = "ethics2025";
 
 export default function TeacherLogin({ onAuth, onBack }) {
-  const [password, setPassword] = useState("");
+  const [pw, setPw] = useState("");
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === TEACHER_PASSWORD) {
+    if (pw === PASSWORD) {
       onAuth();
     } else {
       setError(true);
-      setPassword("");
+      setPw("");
     }
   };
 
   return (
-    <div className="page start-page">
-      <div className="card">
-        <h2 className="teacher-title">교사 모드 로그인</h2>
-        <p className="teacher-desc">
-          교사 전용 페이지입니다.<br />
-          비밀번호를 입력해 주세요.
-        </p>
-        <form onSubmit={handleSubmit}>
+    <div className="landing">
+      <div className="landing-bg" />
+      <div className="landing-content">
+        <h2 className="teacher-login-title">🔒 교사 모드</h2>
+        <p className="teacher-login-desc">교사 전용 페이지입니다. 비밀번호를 입력하세요.</p>
+        <form onSubmit={handleSubmit} style={{ width: "100%" }}>
           <input
-            className="name-input"
+            className="game-input"
             type="password"
-            placeholder="비밀번호 입력"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setError(false);
-            }}
+            placeholder="비밀번호"
+            value={pw}
+            onChange={(e) => { setPw(e.target.value); setError(false); }}
             autoFocus
           />
-          {error && <p className="error-text">비밀번호가 틀렸습니다.</p>}
-          <button className="btn btn-primary" type="submit" disabled={!password}>
-            로그인
+          {error && <p className="error-msg">비밀번호가 틀렸습니다.</p>}
+          <button className="btn-start" type="submit" disabled={!pw}>
+            <span>로그인</span><span className="btn-arrow">→</span>
           </button>
         </form>
-        <button className="btn btn-secondary" onClick={onBack}>
-          돌아가기
-        </button>
+        <button className="btn-teacher-link" onClick={onBack}>← 돌아가기</button>
       </div>
     </div>
   );

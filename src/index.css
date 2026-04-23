@@ -1,43 +1,35 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-light: #e0e7ff;
-  --success: #16a34a;
-  --warning: #ea580c;
-  --danger: #dc2626;
-  --bg: #f0f4ff;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-light: #64748b;
-  --border: #e2e8f0;
+  --bg: #0f0f1a;
+  --card: #1a1a2e;
+  --card2: #16213e;
+  --border: #2d2d4e;
+  --primary: #7c3aed;
+  --primary-light: #a78bfa;
+  --accent: #f59e0b;
+  --green: #10b981;
+  --red: #ef4444;
+  --orange: #f97316;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
   --radius: 16px;
-
-  font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  font-weight: 400;
-  color: var(--text);
-  background-color: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
 }
 
 #root {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 1rem;
   min-height: 100vh;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
