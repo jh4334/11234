@@ -4,7 +4,7 @@ import missions from "../data/missions";
 const SCORE_COLORS = { 0: "wrong", 1: "ok", 2: "great" };
 const SCORE_LABELS = { 0: "아쉬워요", 1: "괜찮아요!", 2: "훌륭해요!" };
 
-export default function GamePage({ onComplete }) {
+export default function ChoiceGame({ onComplete, onExit }) {
   const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState(null);
   const [results, setResults] = useState([]);
@@ -42,9 +42,9 @@ export default function GamePage({ onComplete }) {
     <div className="game-page">
       {/* HUD */}
       <div className="hud">
+        <button className="hud-exit" onClick={onExit}>← 나가기</button>
         <div className="hud-score">⭐ {totalScore}점</div>
         <div className="hud-mission">{idx + 1} / {missions.length}</div>
-        <div className="hud-category">{mission.emoji} {mission.category}</div>
       </div>
 
       {/* 진행 바 */}
