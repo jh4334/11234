@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/ethics-pick-simulator-s0pS8
 
 permissions:
   contents: write
