@@ -18,8 +18,8 @@ export const games = [
     emoji: "🔍",
     difficulty: "medium",
     category: "공정성",
-    maxScore: 10,
-    playable: false,
+    maxScore: 12,
+    playable: true,
   },
   {
     id: 3,
@@ -29,8 +29,8 @@ export const games = [
     emoji: "🎭",
     difficulty: "medium",
     category: "투명성",
-    maxScore: 10,
-    playable: false,
+    maxScore: 8,
+    playable: true,
   },
   {
     id: 4,
@@ -51,8 +51,8 @@ export const games = [
     emoji: "📰",
     difficulty: "medium",
     category: "투명성",
-    maxScore: 10,
-    playable: false,
+    maxScore: 12,
+    playable: true,
   },
   {
     id: 6,
@@ -62,8 +62,8 @@ export const games = [
     emoji: "👆",
     difficulty: "medium",
     category: "프라이버시",
-    maxScore: 10,
-    playable: false,
+    maxScore: 16,
+    playable: true,
   },
   {
     id: 7,

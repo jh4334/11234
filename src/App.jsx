@@ -3,6 +3,10 @@ import GameHub from "./pages/GameHub";
 import ChoiceGame from "./pages/ChoiceGame";
 import TermMatchGame from "./pages/TermMatchGame";
 import ChatbotGuardGame from "./pages/ChatbotGuardGame";
+import BiasGame from "./pages/BiasGame";
+import RealFakeGame from "./pages/RealFakeGame";
+import FakeNewsGame from "./pages/FakeNewsGame";
+import ConsentGame from "./pages/ConsentGame";
 import GameComplete from "./pages/GameComplete";
 import FinalResult from "./pages/FinalResult";
 import TeacherLogin from "./pages/TeacherLogin";
@@ -111,6 +115,18 @@ export default function App() {
       )}
       {step === STEP.GAME && currentGame?.key === "chatbot" && (
         <ChatbotGuardGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "bias" && (
+        <BiasGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "realfake" && (
+        <RealFakeGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "fakenews" && (
+        <FakeNewsGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "consent" && (
+        <ConsentGame onComplete={handleGameComplete} onExit={handleHub} />
       )}
 
       {step === STEP.COMPLETE && lastResult && (
