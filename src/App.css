@@ -1754,6 +1754,74 @@
   font-size: 1.5rem;
 }
 
+.swipe-hint {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.swipe-hint-left {
+  color: var(--red);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.swipe-hint-right {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.consent-card {
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.consent-card:active {
+  cursor: grabbing;
+}
+
+.swipe-indicator {
+  position: absolute;
+  top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 1.2rem;
+  font-weight: 800;
+  z-index: 10;
+  animation: popIn 0.2s ease;
+}
+
+.swipe-indicator.reject {
+  left: 1rem;
+  background: var(--red);
+  color: white;
+  transform: rotate(-15deg);
+}
+
+.swipe-indicator.accept {
+  right: 1rem;
+  background: var(--green);
+  color: white;
+  transform: rotate(15deg);
+}
+
+.swipe-drag-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
 /* ===== PRIVACY GUARD GAME ===== */
 .privacy-info-card {
   background: var(--card);

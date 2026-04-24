@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { consentItems } from "../data/consentItems";
 
 export default function ConsentGame({ onComplete, onExit }) {
@@ -6,15 +6,16 @@ export default function ConsentGame({ onComplete, onExit }) {
   const [swiped, setSwiped] = useState(null);
   const [results, setResults] = useState([]);
   const [totalScore, setTotalScore] = useState(0);
-  const [animDir, setAnimDir] = useState(null);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const startX = useRef(0);
+  const cardRef = useRef(null);
 
   const item = consentItems[idx];
   const progress = ((idx + (swiped !== null ? 1 : 0)) / consentItems.length) * 100;
 
   const handleSwipe = (accept) => {
     if (swiped !== null) return;
-
-    setAnimDir(accept ? "right" : "left");
     setSwiped(accept);
 
     const correct = accept === item.shouldAccept;
@@ -23,20 +24,75 @@ export default function ConsentGame({ onComplete, onExit }) {
     setResults((r) => [...r, { id: item.id, accepted: accept, correct, score: pts }]);
   };
 
+  const handleTouchStart = (e) => {
+    if (swiped !== null) return;
+    startX.current = e.touches[0].clientX;
+    setDragging(true);
+  };
+
+  const handleMouseDown = (e) => {
+    if (swiped !== null) return;
+    startX.current = e.clientX;
+    setDragging(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!dragging || swiped !== null) return;
+    const diff = e.touches[0].clientX - startX.current;
+    setDragX(diff);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!dragging || swiped !== null) return;
+    const diff = e.clientX - startX.current;
+    setDragX(diff);
+  };
+
+  const handleEnd = () => {
+    if (!dragging || swiped !== null) return;
+    setDragging(false);
+
+    if (dragX > 80) {
+      handleSwipe(true);
+    } else if (dragX < -80) {
+      handleSwipe(false);
+    }
+    setDragX(0);
+  };
+
   const handleNext = () => {
     if (idx + 1 >= consentItems.length) {
       onComplete({ totalScore, results });
     } else {
       setIdx((i) => i + 1);
       setSwiped(null);
-      setAnimDir(null);
+      setDragX(0);
     }
   };
 
   const isCorrect = swiped !== null && swiped === item.shouldAccept;
+  const rotation = dragX * 0.1;
+  const opacity = Math.max(0.5, 1 - Math.abs(dragX) / 300);
+
+  const cardStyle = swiped !== null
+    ? {
+        transform: `translateX(${swiped ? 300 : -300}px) rotate(${swiped ? 20 : -20}deg)`,
+        opacity: 0,
+        transition: "all 0.4s ease"
+      }
+    : {
+        transform: `translateX(${dragX}px) rotate(${rotation}deg)`,
+        opacity,
+        transition: dragging ? "none" : "all 0.3s ease"
+      };
 
   return (
-    <div className="game-page">
+    <div
+      className="game-page"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+    >
       <div className="hud">
         <button className="hud-exit" onClick={onExit}>✕</button>
         <div className="hud-score">🎯 {totalScore}점</div>
@@ -48,7 +104,27 @@ export default function ConsentGame({ onComplete, onExit }) {
         <div className="progress-thumb" style={{ left: `${progress}%` }} />
       </div>
 
-      <div className={`consent-card ${animDir ? `swipe-${animDir}` : ""}`}>
+      <div className="swipe-hint">
+        <span className="swipe-hint-left">← 거부</span>
+        <span className="swipe-hint-right">허용 →</span>
+      </div>
+
+      <div
+        ref={cardRef}
+        className="consent-card"
+        style={cardStyle}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleEnd}
+        onMouseDown={handleMouseDown}
+      >
+        {dragX < -30 && swiped === null && (
+          <div className="swipe-indicator reject">✕ 거부</div>
+        )}
+        {dragX > 30 && swiped === null && (
+          <div className="swipe-indicator accept">✓ 허용</div>
+        )}
+
         <div className="consent-app">
           <span className="consent-emoji">{item.emoji}</span>
           <span className="consent-app-name">{item.app}</span>
@@ -65,31 +141,7 @@ export default function ConsentGame({ onComplete, onExit }) {
         </div>
 
         {swiped === null && (
-          <div className="consent-buttons">
-            <button
-              className="consent-btn consent-reject"
-              onClick={() => handleSwipe(false)}
-            >
-              <span className="consent-btn-icon">✕</span>
-              <span>거부</span>
-            </button>
-            <button
-              className="consent-btn consent-accept"
-              onClick={() => handleSwipe(true)}
-            >
-              <span className="consent-btn-icon">✓</span>
-              <span>허용</span>
-            </button>
-          </div>
-        )}
-
-        {swiped !== null && (
-          <div className={`consent-result ${isCorrect ? "consent-correct" : "consent-wrong"}`}>
-            <span className="consent-result-icon">
-              {isCorrect ? "⭕" : "❌"}
-            </span>
-            <span>{isCorrect ? "좋은 판단!" : "다시 생각해봐요"}</span>
-          </div>
+          <p className="swipe-drag-hint">👆 카드를 좌우로 스와이프하세요!</p>
         )}
       </div>
 
