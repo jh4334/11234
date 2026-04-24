@@ -40,8 +40,8 @@ export const games = [
     emoji: "🛡️",
     difficulty: "hard",
     category: "프라이버시",
-    maxScore: 10,
-    playable: false,
+    maxScore: 24,
+    playable: true,
   },
   {
     id: 5,
@@ -73,8 +73,8 @@ export const games = [
     emoji: "⚖️",
     difficulty: "hard",
     category: "공정성",
-    maxScore: 10,
-    playable: false,
+    maxScore: 18,
+    playable: true,
   },
   {
     id: 8,
@@ -84,8 +84,8 @@ export const games = [
     emoji: "🗺️",
     difficulty: "hard",
     category: "책임감",
-    maxScore: 10,
-    playable: false,
+    maxScore: 15,
+    playable: true,
   },
   {
     id: 9,

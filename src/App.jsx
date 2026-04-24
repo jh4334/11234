@@ -7,6 +7,9 @@ import BiasGame from "./pages/BiasGame";
 import RealFakeGame from "./pages/RealFakeGame";
 import FakeNewsGame from "./pages/FakeNewsGame";
 import ConsentGame from "./pages/ConsentGame";
+import PrivacyGuardGame from "./pages/PrivacyGuardGame";
+import FairAIGame from "./pages/FairAIGame";
+import EthicsMazeGame from "./pages/EthicsMazeGame";
 import GameComplete from "./pages/GameComplete";
 import FinalResult from "./pages/FinalResult";
 import TeacherLogin from "./pages/TeacherLogin";
@@ -127,6 +130,15 @@ export default function App() {
       )}
       {step === STEP.GAME && currentGame?.key === "consent" && (
         <ConsentGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "privacy" && (
+        <PrivacyGuardGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "fairai" && (
+        <FairAIGame onComplete={handleGameComplete} onExit={handleHub} />
+      )}
+      {step === STEP.GAME && currentGame?.key === "maze" && (
+        <EthicsMazeGame onComplete={handleGameComplete} onExit={handleHub} />
       )}
 
       {step === STEP.COMPLETE && lastResult && (
