@@ -1,0 +1,68 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #FAF7F2;
+  --sidebar-bg: #F2EAE0;
+  --sidebar-width: 220px;
+  --card-bg: #FFFFFF;
+  --accent: #E07A3A;
+  --accent-hover: #C86828;
+  --accent-light: #FFF0E6;
+  --accent-soft: #FDEEE3;
+  --text: #3D2B1F;
+  --text-muted: #9A8070;
+  --text-light: #BBA898;
+  --border: #EDE0D0;
+  --border-light: #F5EDE3;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 12px rgba(61, 43, 31, 0.06);
+  --shadow-md: 0 4px 24px rgba(61, 43, 31, 0.10);
+
+  --subject-1: #F4A97F;
+  --subject-2: #A8D4C2;
+  --subject-3: #B8AADE;
+  --subject-4: #F9CF7A;
+  --subject-5: #F49AA0;
+  --subject-6: #91C4E8;
+  --subject-7: #C5E1A5;
+  --subject-8: #FFCCBC;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { height: 100%; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--text);
+  outline: none;
+}
+
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
