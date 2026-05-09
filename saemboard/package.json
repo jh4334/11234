@@ -23,24 +23,20 @@
       "dist/**/*",
       "electron/**/*"
     ],
+    "icon": "build/icon.png",
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         }
-      ],
-      "icon": "build/icon.ico"
+      ]
     },
     "mac": {
-      "target": "dmg",
-      "icon": "build/icon.icns"
+      "target": "dmg"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "build/icon.png",
       "category": "Education"
     },
     "nsis": {
