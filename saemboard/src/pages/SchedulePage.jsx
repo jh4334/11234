@@ -13,12 +13,9 @@ export default function SchedulePage() {
   const [events, setEvents] = useState(() => {
     const stored = load('events', {});
     const list = [];
-    Object.entries(stored).forEach(([date, evts]) => {
-      evts.forEach(e => list.push({ ...e, date }));
-    });
+    Object.entries(stored).forEach(([date, evts]) => evts.forEach(e => list.push({ ...e, date })));
     return list.sort((a, b) => a.date.localeCompare(b.date));
   });
-
   const [form, setForm] = useState({ date: '', title: '', color: 'orange' });
   const [showForm, setShowForm] = useState(false);
 
@@ -28,11 +25,8 @@ export default function SchedulePage() {
     const newEvt = { id: Date.now(), title: form.title.trim(), color: form.color };
     const updated = { ...stored, [form.date]: [...(stored[form.date] || []), newEvt] };
     save('events', updated);
-
     const list = [];
-    Object.entries(updated).forEach(([date, evts]) => {
-      evts.forEach(e => list.push({ ...e, date }));
-    });
+    Object.entries(updated).forEach(([date, evts]) => evts.forEach(e => list.push({ ...e, date })));
     setEvents(list.sort((a, b) => a.date.localeCompare(b.date)));
     setForm({ date: '', title: '', color: 'orange' });
     setShowForm(false);
@@ -49,43 +43,28 @@ export default function SchedulePage() {
     <div className="page">
       <div className="page-header">
         <h1 className="page-title">📅 일정 관리</h1>
-        <button className="btn-primary" onClick={() => setShowForm(s => !s)}>
-          + 일정 추가
-        </button>
+        <button className="btn-primary" onClick={() => setShowForm(s => !s)}>+ 일정 추가</button>
       </div>
 
       {showForm && (
         <div className="widget schedule-form">
           <div className="form-row">
             <label className="form-label">날짜</label>
-            <input
-              type="date"
-              className="form-input"
-              value={form.date}
-              onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
-            />
+            <input type="date" className="form-input" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} />
           </div>
           <div className="form-row">
             <label className="form-label">제목</label>
-            <input
-              className="form-input"
-              placeholder="일정 제목을 입력하세요"
-              value={form.title}
+            <input className="form-input" placeholder="일정 제목" value={form.title}
               onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-              onKeyDown={e => e.key === 'Enter' && addEvent()}
-            />
+              onKeyDown={e => e.key === 'Enter' && addEvent()} />
           </div>
           <div className="form-row">
             <label className="form-label">색상</label>
             <div className="cal-color-picker">
               {EVENT_COLORS.map(ec => (
-                <button
-                  key={ec.id}
+                <button key={ec.id}
                   className={`cal-color-btn${form.color === ec.id ? ' cal-color-btn--active' : ''}`}
-                  style={{ background: ec.color }}
-                  onClick={() => setForm(f => ({ ...f, color: ec.id }))}
-                  title={ec.label}
-                />
+                  style={{ background: ec.color }} onClick={() => setForm(f => ({ ...f, color: ec.id }))} title={ec.label} />
               ))}
             </div>
           </div>
@@ -97,9 +76,7 @@ export default function SchedulePage() {
       )}
 
       <div className="schedule-list">
-        {events.length === 0 && (
-          <div className="empty-state">일정이 없습니다. 일정을 추가해보세요! 📆</div>
-        )}
+        {events.length === 0 && <div className="empty-state">일정이 없습니다. 일정을 추가해보세요! 📆</div>}
         {events.map(ev => {
           const c = EVENT_COLORS.find(ec => ec.id === ev.color);
           return (
@@ -114,68 +91,6 @@ export default function SchedulePage() {
           );
         })}
       </div>
-
-      <style>{`
-        .page { display: flex; flex-direction: column; gap: 20px; }
-        .page-header { display: flex; align-items: center; justify-content: space-between; }
-        .page-title { font-size: 20px; font-weight: 700; color: var(--text); }
-
-        .schedule-form { display: flex; flex-direction: column; gap: 14px; }
-        .form-row { display: flex; align-items: center; gap: 12px; }
-        .form-label { font-size: 13px; font-weight: 600; color: var(--text-muted); width: 40px; flex-shrink: 0; }
-        .form-input {
-          flex: 1; padding: 7px 12px;
-          border: 1.5px solid var(--border);
-          border-radius: var(--radius-sm); font-size: 13px;
-          background: var(--bg); color: var(--text);
-        }
-        .form-input:focus { border-color: var(--accent); }
-        .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
-
-        .cal-color-picker { display: flex; gap: 8px; }
-        .cal-color-btn {
-          width: 22px; height: 22px; border-radius: 50%;
-          border: 2px solid transparent; cursor: pointer;
-          transition: transform 0.1s;
-        }
-        .cal-color-btn--active { border-color: var(--text); transform: scale(1.2); }
-
-        .schedule-list { display: flex; flex-direction: column; gap: 8px; }
-        .empty-state {
-          text-align: center; padding: 40px; color: var(--text-muted);
-          background: var(--card-bg); border-radius: var(--radius);
-          border: 1px solid var(--border-light);
-        }
-        .schedule-item {
-          display: flex; align-items: center; gap: 14px;
-          background: var(--card-bg); padding: 14px 16px;
-          border-radius: var(--radius-sm); border: 1px solid var(--border-light);
-          box-shadow: var(--shadow);
-          transition: box-shadow 0.15s;
-        }
-        .schedule-item:hover { box-shadow: var(--shadow-md); }
-        .schedule-item-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-        .schedule-item-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-        .schedule-item-date { font-size: 11px; color: var(--text-muted); }
-        .schedule-item-title { font-size: 14px; font-weight: 600; color: var(--text); }
-        .schedule-delete { opacity: 0.5; }
-        .schedule-item:hover .schedule-delete { opacity: 1; }
-
-        .btn-primary {
-          padding: 8px 20px; background: var(--accent); color: #fff;
-          border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
-          transition: background 0.15s;
-        }
-        .btn-primary:hover { background: var(--accent-hover); }
-        .btn-secondary {
-          padding: 8px 20px; background: var(--bg); color: var(--text-muted);
-          border-radius: var(--radius-sm); font-size: 13px;
-          border: 1.5px solid var(--border);
-        }
-        .btn-secondary:hover { background: var(--border-light); }
-        .todo-delete { color: var(--text-light); font-size: 12px; cursor: pointer; }
-        .todo-delete:hover { color: #E07A3A; }
-      `}</style>
     </div>
   );
 }

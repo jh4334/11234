@@ -39,7 +39,6 @@ export default function TodayRecord() {
         <span className="widget-title">📖 오늘 기록</span>
         <span className="memo-status">{saved ? '' : '저장 중...'}</span>
       </div>
-
       <div className="record-week-dots">
         {weekDots.map(({ label, key, hasRecord }) => (
           <div key={key} className={`record-dot-col${key === today ? ' record-dot-col--today' : ''}`}>
@@ -48,33 +47,8 @@ export default function TodayRecord() {
           </div>
         ))}
       </div>
-
-      <textarea
-        className="memo-textarea"
-        placeholder={`${today} 오늘 하루를 기록해보세요...`}
-        value={text}
-        onChange={handleChange}
-        style={{ minHeight: '90px' }}
-      />
-
-      <style>{`
-        .record-week-dots {
-          display: flex; gap: 4px; justify-content: space-between;
-          margin-bottom: 10px;
-        }
-        .record-dot-col {
-          display: flex; flex-direction: column; align-items: center; gap: 4px;
-        }
-        .record-dot {
-          width: 10px; height: 10px; border-radius: 50%;
-          background: var(--border); transition: background 0.2s;
-        }
-        .record-dot--filled { background: var(--accent); }
-        .record-dot-col--today .record-dot { border: 2px solid var(--accent); }
-        .record-dot-col--today .record-dot--filled { background: var(--accent); }
-        .record-dot-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
-        .record-dot-col--today .record-dot-label { color: var(--accent); }
-      `}</style>
+      <textarea className="memo-textarea" placeholder={`${today} 오늘 하루를 기록해보세요...`}
+        value={text} onChange={handleChange} style={{ minHeight: '90px' }} />
     </div>
   );
 }
