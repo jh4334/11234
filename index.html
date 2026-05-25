@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>에틱스 픽 (ETHICS PICK)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div>
+          <p class="app-kicker">AI 윤리 선택 시뮬레이터</p>
+          <h1>에틱스 픽 <span>(ETHICS PICK)</span></h1>
+        </div>
+        <div class="header-status" id="progressText">시작 화면</div>
+      </header>
+
+      <main>
+        <section class="screen active" id="screen-start">
+          <div class="screen-hero">
+            <h2>오늘 우리는 AI를 <strong>“똑똑하게”가 아니라 “바르게”</strong> 쓰는 연습을 합니다.</h2>
+            <p>짧은 상황을 읽고 선택하면 즉시 피드백을 받습니다. 마지막에는 나의 윤리 프로필과 학급 결과를 확인해요.</p>
+          </div>
+          <div class="card">
+            <label>
+              이름/닉네임 (선택)
+              <input type="text" id="studentName" placeholder="예: 윤아" />
+            </label>
+            <label>
+              학급 코드 (선택)
+              <input type="text" id="classCode" placeholder="예: 2-3" />
+            </label>
+          </div>
+          <button class="primary" id="startButton">사전 진단 시작하기</button>
+        </section>
+
+        <section class="screen" id="screen-pre">
+          <div class="screen-hero">
+            <h2>사전 진단 (3문항 · 30초)</h2>
+            <p>AI 윤리 감각을 빠르게 점검합니다. 1~4 단계로 응답하세요.</p>
+          </div>
+          <div id="preQuestions" class="stack"></div>
+          <button class="primary" id="preNextButton">시나리오 미션으로</button>
+        </section>
+
+        <section class="screen" id="screen-mission">
+          <div class="screen-hero">
+            <h2>시나리오 미션</h2>
+            <p>각 상황을 읽고 가장 바람직한 선택을 골라보세요.</p>
+          </div>
+          <div class="card scenario">
+            <div class="scenario-header">
+              <span id="missionTag">미션 1</span>
+              <span class="badge" id="missionTopic">개인정보/동의</span>
+            </div>
+            <p id="missionSituation"></p>
+            <div class="choices" id="missionChoices"></div>
+          </div>
+          <div class="feedback" id="missionFeedback">
+            <div class="feedback-score">
+              윤리 점수: <strong id="missionScore">0</strong>
+            </div>
+            <p id="missionExplanation"></p>
+            <p class="feedback-alternative" id="missionAlternative"></p>
+          </div>
+          <button class="primary" id="missionNextButton" disabled>다음 미션</button>
+        </section>
+
+        <section class="screen" id="screen-post">
+          <div class="screen-hero">
+            <h2>사후 진단</h2>
+            <p>수업 후 당신의 생각이 어떻게 달라졌는지 확인합니다.</p>
+          </div>
+          <div id="postQuestions" class="stack"></div>
+          <div class="card" id="postComparison">
+            <h3>사전-사후 변화</h3>
+            <div class="averages" id="postComparisonBars"></div>
+          </div>
+          <button class="primary" id="postNextButton">결과 보기</button>
+        </section>
+
+        <section class="screen" id="screen-report">
+          <div class="screen-hero">
+            <h2>나의 윤리 프로필</h2>
+            <p>4가지 역량을 한눈에 확인하고 실천 약속을 남겨보세요.</p>
+          </div>
+          <div class="card">
+            <div class="bars" id="competencyBars"></div>
+          </div>
+          <div class="card">
+            <label>
+              나의 실천 약속 1가지
+              <input type="text" id="promiseInput" placeholder="예: AI 자료를 사용할 때 출처를 꼭 밝히겠다" />
+            </label>
+            <button class="secondary" id="savePromiseButton">약속 저장</button>
+            <p class="saved" id="promiseSaved"></p>
+          </div>
+          <div class="card" id="hardestQuestion"></div>
+          <button class="primary" id="reportNextButton">교사용 대시보드로</button>
+        </section>
+
+        <section class="screen" id="screen-dashboard">
+          <div class="screen-hero">
+            <h2>교사용 대시보드</h2>
+            <p>학급 전체의 변화와 문항별 분포를 빠르게 확인하세요.</p>
+          </div>
+          <div class="card">
+            <h3>학급 평균 (사전 vs 사후)</h3>
+            <div id="classAverage" class="averages"></div>
+          </div>
+          <div class="card">
+            <h3>문항별 선택 분포</h3>
+            <div id="questionDistribution" class="distribution"></div>
+          </div>
+          <button class="secondary" id="downloadCsvButton">CSV 다운로드</button>
+          <p class="note">CSV에는 선택지, 점수, 진단 결과가 포함됩니다.</p>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
